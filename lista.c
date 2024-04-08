@@ -38,8 +38,14 @@ struct _lista {
 /* insere no comeco da lista, retorna a lista atualizada */
 lista_t* lista_insere( lista_t* l, void* dado )
 {
-	/* TODO fazer inserção nessa aula */
-	return NULL;
+	lista_t* novo_elemento = (lista_t*)malloc(sizeof(lista_t));
+    if (novo_elemento == NULL) {
+        fprintf(stderr, "Erro ao alocar memória para novo elemento.\n");
+        exit(EXIT_FAILURE);
+    }
+    novo_elemento->dado = dado;
+    novo_elemento->prox = l;
+    return novo_elemento;
 }
 
 /* libera a memória de cada nó da lista.
@@ -47,7 +53,12 @@ lista_t* lista_insere( lista_t* l, void* dado )
  */
 void lista_destroi( lista_t* l )
 {
-	/* TODO libera toda a lista */
+	while (l != NULL) {
+        lista_t* proximo = l->prox;
+        free(l);
+        l = proximo;
+    }
+}
 }
 
 
